@@ -1,0 +1,41 @@
+.jobs-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin: 15px 0;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.cardContainer {display: flex;flex-direction: column;margin-left: 20px; width: 90%;text-decoration: none;}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+   
+}
+.card-title{
+    color: #3b4252;
+    font-size: 20px;
+    font-weight: bold;
+}
+.sub-content {
+    margin-right: 30px;
+    color:#000;
+}
+button{
+    background: none;
+    font-size: 16px;
+    color: #000;
+}
+.icon-star.active{
+    color: red;
+}
+.card-title:hover {
+    text-decoration: underline;
+}

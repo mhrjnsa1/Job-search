@@ -1,0 +1,30 @@
+<div class="navigation">
+<a routerLink="jobs" class="">Back</a>
+</div>
+<div class="jobDescriptionWrapper" *ngIf="!detailsError; else showErrorMessage">
+<div class="detail-header">
+    <div class="logo">
+        <img [src]="details.companyLogo" [alt]="details.title"/>
+    </div>
+    <div class="details-wrapper">
+        <div class="title">{{details.title}}</div>
+        <div class="labelWrapper">
+        <span class="labels" *ngFor="let type of details.types">{{type}}</span>
+        <span class="labels" *ngFor="let industrie of details.industries">{{industrie}}</span>
+    </div>
+    </div>
+</div>
+<div class="detailsWrapper">
+    <div class="detailsLabel"><div class="titleLabel">Publish Date: </div> <div class="details-print">{{details.publishDate | date:'M/dd/YY'}}</div></div>
+    <div class="detailsLabel"><div class="titleLabel">Location: </div> <div class="details-print">{{details.location}}</div></div>
+    <div class="detailsLabel"><div class="titleLabel">Reference: </div> <div class="details-print">{{details.reference}}</div></div>
+    <div class="description">
+        <div class="titleLabel">Description:</div>
+        <div class="details-print" [innerHtml]="details.description | trustHtml"></div>
+   
+    </div>
+</div>
+</div>
+<ng-template #showErrorMessage>
+    <h4>Job description not available</h4>
+</ng-template>

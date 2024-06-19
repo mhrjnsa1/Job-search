@@ -1,0 +1,7 @@
+<div *ngFor="let item of jobs">
+    <app-job-card [job]="item" (selectFavorites)="toggleFavorites($event)" [favorite]="showFavoritesIcon"></app-job-card>
+</div>
+
+<div class="errorMessage" *ngIf="errorMessage">
+    <h4>{{errorMessage}}</h4>
+</div>

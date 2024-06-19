@@ -1,0 +1,8 @@
+<div class="favoritesContainer" *ngIf="favorites.length; else nofavorites">
+    <div *ngFor="let item of favorites">
+        <app-job-card [job]="item" [favorite]="showFavoritesIcon"></app-job-card>
+    </div>
+</div>
+<ng-template #nofavorites>
+    <h4>No favorite selected</h4>
+</ng-template>
