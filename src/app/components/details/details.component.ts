@@ -25,7 +25,7 @@ ngOnInit(): void {
     next:(res:Details) => {
       this.details=res;
      },
-    error:(error) =>{
+    error:() =>{
       this.detailsError="Job description  not available"
     }
   })

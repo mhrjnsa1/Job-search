@@ -29,12 +29,12 @@ ngOnInit(): void {
       this.jobs=res;
       this.retainFavorites(this.jobs)
     },
-    error:(err:string) =>{
+    error:() =>{
       this.errorMessage="Oops someting went wrong, Please refresh the page again"
     }
   })  
 }
-retainFavorites(jobs:Jobs[])
+retainFavorites(jobs:Jobs[]):void
 {
   //get stored favorites from localstorage while refresh
   const getFavorites:Jobs[]=this.jobSerivce.getFavorites();
@@ -43,7 +43,7 @@ retainFavorites(jobs:Jobs[])
     jobs[getIndex].favorite=true;
   })
 }
-toggleFavorites(id:number)
+toggleFavorites(id:number):void
 {
   //toggle favorite while select and unselect
   this.jobs.forEach((list:Jobs) =>{ if(list.id == id){list.favorite= !list.favorite}})
