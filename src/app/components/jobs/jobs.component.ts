@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JobsService } from '../../services/jobs.service';
 import { Jobs } from '../../models/jobs-model';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { ApiService } from '../../services/api.service';
 import { RouterOutlet } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-jobs',
   standalone: true,
@@ -12,17 +13,18 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.css'
 })
-export class JobsComponent {
+export class JobsComponent implements OnInit,OnDestroy{
   jobs:Jobs[]=[];
   showFavoritesIcon:boolean=true;
   errorMessage:string | null=null;
+  private unsubscribe$ = new Subject<void>();
   constructor(private apiService:ApiService,public jobSerivce:JobsService)
   {
 
   }
 ngOnInit(): void {
 
-  this.apiService.getJobs().subscribe({
+  this.apiService.getJobs().pipe(takeUntil(this.unsubscribe$)).subscribe({
     next:(res:Jobs[]) => {
       this.jobs=res;
       this.retainFavorites(this.jobs)
@@ -47,5 +49,9 @@ toggleFavorites(id:number)
   this.jobs.forEach((list:Jobs) =>{ if(list.id == id){list.favorite= !list.favorite}})
   //update in localstorage
   this.jobSerivce.setFavorites(this.jobs.filter((x:Jobs) => x.favorite))
+}
+ngOnDestroy(): void {
+  this.unsubscribe$.next();
+  this.unsubscribe$.complete();
 }
 }
