@@ -14,7 +14,7 @@ export class JobCardComponent {
   @Input()
   job!: Jobs;
   @Input() favorite!:boolean;
-  @Output() selectFavorites= new EventEmitter();
+  @Output() selectFavorites= new EventEmitter<number>();
   constructor(){}
   addToFavorites(id:number):void
   {
